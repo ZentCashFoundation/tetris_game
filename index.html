@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Zent Tetris</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+
+    <body>
+
+        <h1>Zent Tetris</h1>
+
+        <div id="auth">
+            <input id="email" placeholder="email">
+            <input id="password" type="password" placeholder="password">
+            <br>
+            <button onclick="register()">Register</button>
+            <button onclick="login()">Login</button>
+        </div>
+
+        <br>
+
+        <button onclick="play()">PLAY</button>
+
+        <br><br>
+
+        <div id="container">
+
+            <canvas id="tetris" width="240" height="400"></canvas>
+
+            <div id="panel">
+                <p>Score: <span id="score">0</span></p>
+                <p>Lines: <span id="lines">0</span></p>
+                <p>Level: <span id="level">1</span></p>
+
+                <p>Next</p>
+                <canvas id="next" width="80" height="80"></canvas>
+
+                <p>Hold</p>
+                <canvas id="hold" width="80" height="80"></canvas>
+
+                <p>Controls</p>
+                <p>← → Move</p>
+                <p>↑ Rotate</p>
+                <p>↓ Soft drop</p>
+                <p>Space Hard drop</p>
+                <p>C Hold piece</p>
+				<p>P Hold piece</p>
+            </div>
+
+        </div>
+
+    </body>
+</html>

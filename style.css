@@ -1,0 +1,22 @@
+body{
+  background:#111;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+}
+#container{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+canvas{
+  background:black;
+  border:2px solid #333;
+}
+button{
+  padding:10px;
+  margin:5px;
+}
+#panel{
+  text-align:left;
+}
