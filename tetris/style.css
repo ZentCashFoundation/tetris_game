@@ -34,6 +34,10 @@ body{
   justify-content:center;
   gap:20px;
 }
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
 canvas{
   background:black;
   border:2px solid #333;
@@ -80,6 +84,57 @@ button{
 #auth button:hover{
   background:#d7ffaa;
 }
+
+#auth button.close-session-btn:hover{
+  background:#f37859;
+}
+
+.deposit {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: auto;
+    align-items: center;
+    background: #7e7e7e;
+    min-width: 300px;
+    max-width: 350px;
+    border-radius: 1rem;
+    border: 1px solid rgb(172, 172, 172);
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.deposit p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background: #303a46;
+  padding: 1rem;
+  border-radius: 1rem;
+
+}
+
+.deposit .deposit-title{
+  font-size: x-large;
+  margin: 1rem;
+}
+
+.deposit span#address{
+  word-break: break-all;
+  font-size: 0.7rem;
+  padding-top: 1rem;
+}
+
+.deposit span#paymentid{
+  word-break: break-all;
+  font-size: 0.7rem;
+}
+
+.deposit span#integratedaddress{
+  word-break: break-all;
+  font-size: 0.7rem;
+}
+
+
 .userbalance {
     display: flex;
     flex-direction: column;
@@ -92,9 +147,18 @@ button{
     border-radius: 1rem;
     border: 1px solid rgb(172, 172, 172);
     margin-top: 2rem;
-    padding-top:2rem;
     padding-bottom: 2rem;
 }
+
+.userbalance .userbalance-title{
+  font-size: x-large;
+  margin: 1rem;
+}
+
+.userbalance button:hover{
+    background: #faef56;
+}
+
 .withdraw {
     display: flex;
     flex-direction: column;
@@ -107,9 +171,14 @@ button{
     border-radius: 1rem;
     border: 1px solid rgb(172, 172, 172);
     margin-top: 2rem;
-    padding-top:2rem;
     padding-bottom: 2rem;
 }
+
+.withdraw .withdraw-title{
+  font-size: x-large;
+  margin: 1rem;
+}
+
 .withdraw input{
   padding:10px;
   margin:5px;
@@ -123,21 +192,39 @@ button{
   min-width:100px;
   border-radius: 3rem;
 }
+
+.withdraw button:hover{
+  background:#9eff44;
+}
 .rungames{
   margin-top: 2rem;
   
 }
 .play{
   border-radius: 1rem;
-
 }
-.content-container{
+
+.play:hover{
+  background: #ffc400;
+}
+
+.content-container-right{
+  background: #1f1c1c;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  max-height: 100%;
+}
+.content-container-left{
   background: #4e4e4e;
   padding: 2rem;
   border-radius: 1rem;
   margin-right: 2rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
+  max-height: 100%;
 }
 .game-container{
   background: #1f1c1c;
@@ -146,6 +233,7 @@ button{
   margin-right: 2rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
+  max-height: 100%;
 }
 
 .updatebalance{
@@ -154,4 +242,23 @@ button{
 
 #panel{
   text-align:left;
+}
+
+.ranking-container table {
+  min-width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.ranking-container table thead {
+  background: #003877;
+}
+.ranking-container table tbody {
+  background: #61abff;
+}
+.ranking-container table tbody tr{
+  border: 1px solid #000000;
+}
+.ranking-container table tbody tr:nth-child(2n+2){
+  background: #2e63a0;
 }

@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!passwordInput) return;
     const authTitle = document.querySelector('.auth-title');
     if (!authTitle) return;
+    const withdraw = document.querySelector(".withdraw");
+    if (!withdraw) return;
+    const deposit = document.querySelector(".deposit");
+    if (!deposit) return;
 
     if (!token) {
         userbalance.style.display = "none";
@@ -38,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         emailInput.style.display = "initial"; 
         passwordInput.style.display = "initial";
         authTitle.style.display = "initial";
+        deposit.style.display = "none";
+        withdraw.style.display = "none";
     } else {
         userbalance.style.display = "flex";
         playgame.style.display = "initial";
@@ -47,11 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
         emailInput.style.display = "none";
         passwordInput.style.display = "none";
         authTitle.style.display = "none";
+        deposit.style.display = "flex";
+        withdraw.style.display = "flex";
+        getBalance()
+        deposit2()
+        
+
     }
 
 });
 
-
+rankinglist()
 
 async function closeSession() {
     localStorage.removeItem('token');
@@ -109,20 +121,8 @@ async function login() {
     console.log("Email guardado:", email.value);
 
     getBalance();
+    deposit2()
 
-    const userbalance = document.querySelector('.userbalance');
-    if (!data.error) {
-        userbalance.style.display = "flex";
-    }
-
-    const playgame = document.querySelector('.play');
-    if (!data.error) {
-        playgame.style.display = "initial";
-    }
-    const closeSessionBtn = document.querySelector('.close-session-btn');
-    if (!data.error) {
-        closeSessionBtn.style.display = "initial";
-    }
     const registerBtn = document.querySelector('.register-btn');
     if (!registerBtn) return;
     const loginBtn = document.querySelector('.login-btn');
@@ -133,12 +133,42 @@ async function login() {
     if (!passwordInput) return;
     const authTitle = document.querySelector('.auth-title');
     if (!authTitle) return;
+    const closeSessionBtn = document.querySelector('.close-session-btn');
+    const deposit = document.querySelector('.deposit');
+    const userbalance = document.querySelector('.userbalance');
+    const withdraw = document.querySelector('.withdraw');
+    const playgame = document.querySelector('.play');
+    closeSessionBtn.style.display = "initial";
+    deposit.style.display = "flex";
+    userbalance.style.display = "flex";
+    withdraw.style.display = "flex";
+    playgame.style.display = "initial";
     registerBtn.style.display = "none";
     loginBtn.style.display = "none";
     emailInput.style.display = "none";
     passwordInput.style.display = "none";
     authTitle.style.display = "none"
 }
+
+async function deposit2() {
+        const res = await fetch(API + "/payment/deposit", {
+            method: "GET",
+            headers: { 
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error("Error en la petición: " + res.status);
+        }
+
+        const data = await res.json();
+        document.getElementById("address").innerText = data.address;
+        document.getElementById("paymentid").innerText = data.paymentId;
+        document.getElementById("integratedaddress").innerText = data.integratedAddress;
+
+}       
 
 async function getBalance() {
     const res = await fetch(API + "/payment/balance", {
@@ -154,6 +184,79 @@ async function getBalance() {
     balance = balance.toFixed(2);
     document.getElementById("balance").innerText = balance;  
 }
+
+async function withdraw() {
+    const res = await fetch(API + "/payment/withdraw", {
+        method: "POST",
+        headers: { 
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+            destination: address.value,
+            amount: Number(amount.value)
+        })
+    });
+
+    const data = await res.json();
+
+    // Si hay error
+    if (data.error) {
+        alert(data.error);
+        return;
+    }
+}
+
+async function rankinglist() {
+    const res = await fetch(API + "/game/rankinglist", {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+            game: "tetris"
+        })
+    });
+
+    const data = await res.json();
+
+    const tbody = document.getElementById("ranking-body");
+    tbody.innerHTML = ""; 
+
+    if (!data.rankinglist || data.rankinglist.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 3;
+        td.textContent = "No hay datos.";
+        td.style.textAlign = "center";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+    }
+
+    data.rankinglist.forEach((item, index) => {
+        const tr = document.createElement("tr");
+
+        // Rank
+        const tdRank = document.createElement("td");
+        tdRank.textContent = item.rank ?? (index + 1);
+        tr.appendChild(tdRank);
+
+        // Email
+        const tdEmail = document.createElement("td");
+        tdEmail.textContent = item.email;
+        tr.appendChild(tdEmail);
+
+        // Score
+        const tdScore = document.createElement("td");
+        tdScore.textContent = item.score;
+        tr.appendChild(tdScore);
+
+        tbody.appendChild(tr);
+    });
+}
+
+
 
 
 async function play() {
@@ -482,9 +585,13 @@ document.addEventListener("keydown", event => {
     if (event.key === "ArrowRight") playerMove(1);
     if (event.key === "ArrowDown") playerDrop();
     if (event.key === "ArrowUp") playerRotate();
+    if (event.key === "a") playerMove(-1);
+    if (event.key === "d") playerMove(1);
+    if (event.key === "s") playerDrop();
+    if (event.key === "w") playerRotate();
     if (event.key === " ") hardDrop();
     if (event.key === "c") holdPiece();
-    if (event.key === "p") togglePause(); // Pausar / reanudar
+    if (event.key === "p") togglePause(); 
 });
 
 // =======================

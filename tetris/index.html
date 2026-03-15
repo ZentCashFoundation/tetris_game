@@ -16,61 +16,102 @@
        <section class="game">
             <div class="container">
                 <div class="row"> 
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 content-container">
-                        <div id="auth">
-                            <h2 class="auth-title">Authentication</h2>
-                            <input id="email" placeholder="email">
-                            <input id="password" type="password" placeholder="password">
-                            <br>
-                            <div>
-                                <button class="register-btn" onclick="register()">Register</button>
-                                <button class="login-btn" onclick="login()">Login</button>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="content-container-left">
+                            <div id="auth">
+                                <h2 class="auth-title">Authentication</h2>
+                                <input id="email" placeholder="email">
+                                <input id="password" type="password" placeholder="password">
+                                <br>
+                                <div>
+                                    <button class="register-btn" onclick="register()">Register</button>
+                                    <button class="login-btn" onclick="login()">Login</button>
+                                </div>
+                                <button class="close-session-btn" onclick="closeSession()">Close Session</button>
                             </div>
-                            <button class="close-session-btn" onclick="closeSession()">Close Session</button>
-                        </div>
-                        <div class="userbalance">
-                            <p>Balance </br><span id="balance">0</span></p>
-                            <button class="updatebalance" onclick="getBalance()">Update Balance</button>
-                        </div>
-                        <div class="withdraw">
-                            <input id="address" placeholder="Address">
-                            <input id="amount"  placeholder="Amount">
-                            <div>
-                                <button class="withdraw-btn" >Withdraw</button>
+                            <div class="deposit">
+                                <h2 class="deposit-title">Deposit</h2>
+                                <h5>Address</h5>
+                                <p><span id="address">...</span></p>
+                                <h5>Payment ID</h5>
+                                <p><span id="paymentid">...</span></p>
+                                <h5>Integrated Address</h5>
+                                <p><span id="integratedaddress">...</span></p>
                             </div>
-
-                        </div>
-                        <div class="rungames">
-                            <button class="play" onclick="play()">PLAY</button>
+                            <div class="rungames">
+                                <button class="play" onclick="play()">Play Game</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 game-container">
-                        <div id="container">
-                            <canvas id="tetris" width="240" height="400"></canvas>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="game-container">
+                            <div id="container">
+                                <canvas id="tetris" width="240" height="400"></canvas>
 
-                            <div id="panel">
-                                <p>Score: <span id="score">0</span></p>
-                                <p>Lines: <span id="lines">0</span></p>
-                                <p>Level: <span id="level">1</span></p>
+                                <div id="panel">
+                                    <p>Score: <span id="score">0</span></p>
+                                    <p>Lines: <span id="lines">0</span></p>
+                                    <p>Level: <span id="level">1</span></p>
 
-                                <p>Next</p>
-                                <canvas id="next" width="80" height="80"></canvas>
+                                    <p>Next</p>
+                                    <canvas id="next" width="80" height="80"></canvas>
 
-                                <p>Hold</p>
-                                <canvas id="hold" width="80" height="80"></canvas>
+                                    <p>Hold</p>
+                                    <canvas id="hold" width="80" height="80"></canvas>
 
-                                <p>Controls</p>
-                                <p>← → Move</p>
-                                <p>↑ Rotate</p>
-                                <p>↓ Soft drop</p>
-                                <p>Space Hard drop</p>
-                                <p>C Hold piece</p>
-                                <p>P Pause Game</p>
+                                    <p>Controls</p>
+                                    <p>← → Move</p>
+                                    <p>↑ Rotate</p>
+                                    <p>↓ Soft drop</p>
+                                    <p>Space Hard drop</p>
+                                    <p>C Hold piece</p>
+                                    <p>P Pause Game</p>
+                                </div>
                             </div>
                         </div>                    
-                    </div>
+                    </div>                  
                 </div>
-            </div>
+                <div class="row row-reverse">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="content-container-left">
+                            <div class="userbalance">
+                                <h2 class="userbalance-title">Balance</h2>
+                                <p><span id="balance">0</span></p>
+                                <button class="updatebalance" onclick="getBalance()">Update Balance</button>
+                            </div>
+                            <div class="withdraw">
+                                <h2 class="withdraw-title">Withdraw</h2>
+                                <input id="address" placeholder="Address">
+                                <input id="amount"  placeholder="Amount">
+                                <div>
+                                    <button class="withdraw-btn" onclick="withdraw()">Withdraw</button>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="content-container-right">
+                            <div class="toplist">
+                                <h2 class="toplist-title">Top 10 Ranking List</h2>
+                                <div class="ranking-container">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Email</th>
+                                            <th>Score</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="ranking-body">
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>  
+                </div>                 
+            </div>            
         </section>            
        
         <script src="script.js" defer></script>
